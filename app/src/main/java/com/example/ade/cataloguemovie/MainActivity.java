@@ -12,47 +12,45 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<ArrayList<FilmItems>>  {
+public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<ArrayList<FilmItems>> {
 
-    ListView listView ;
+    ListView listView;
     FilmAdapter adapter;
-    EditText editKota;
+    EditText editFilm;
     Button buttonCari;
 
     static final String EXTRAS_FILM = "EXTRAS_FILM";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         adapter = new FilmAdapter(this);
         adapter.notifyDataSetChanged();
-        listView = (ListView)findViewById(R.id.listView);
+        listView = (ListView) findViewById(R.id.listView);
 
         listView.setAdapter(adapter);
 
-        editKota = (EditText)findViewById(R.id.edit_kota);
-        buttonCari = (Button)findViewById(R.id.btn_kota);
+        editFilm = (EditText) findViewById(R.id.edit_film);
+        buttonCari = (Button) findViewById(R.id.btn_cari);
 
         buttonCari.setOnClickListener(myListener);
 
-        String film = editKota.getText().toString();
+        String film = editFilm.getText().toString();
         Bundle bundle = new Bundle();
-        bundle.putString(EXTRAS_FILM,film);
+        bundle.putString(EXTRAS_FILM, film);
 
         getLoaderManager().initLoader(0, bundle, this);
     }
 
-    //Fungsi ini yang akan menjalankan proses myasynctaskloader
     @Override
     public Loader<ArrayList<FilmItems>> onCreateLoader(int id, Bundle args) {
-
         String kumpulanFilm = "";
-        if (args != null){
+        if (args != null) {
             kumpulanFilm = args.getString(EXTRAS_FILM);
         }
 
-        return new MyAsyncTaskLoader(this,kumpulanFilm);
+        return new MyAsyncTaskLoader(this, kumpulanFilm);
     }
 
     @Override
@@ -64,19 +62,18 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     @Override
     public void onLoaderReset(Loader<ArrayList<FilmItems>> loader) {
         adapter.setData(null);
-
     }
 
     View.OnClickListener myListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            String film = editKota.getText().toString();
+            String film = editFilm.getText().toString();
 
-            if (TextUtils.isEmpty(film))return;
+            if (TextUtils.isEmpty(film)) return;
 
             Bundle bundle = new Bundle();
-            bundle.putString(EXTRAS_FILM,film);
-            getLoaderManager().restartLoader(0,bundle,MainActivity.this);
+            bundle.putString(EXTRAS_FILM, film);
+            getLoaderManager().restartLoader(0, bundle, MainActivity.this);
         }
     };
 }
