@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Catalogue Movie</string>
+    <string name="overview">Deskripsi</string>
+    <string name="release_date">Release Date</string>
+    <string name="judul_film">Judul Film</string>
+    <string name="masukkan_nama_kota">Masukkan id kota misal Jakarta = 1642911</string>
+    <string name="cari">Cari</string>
+    <string name="jakarta">Jakarta</string>
+    <string name="id_jakarta_bandung_semararang">Captain Amerika</string>
+
+</resources>
