@@ -8,6 +8,7 @@ import org.json.JSONObject;
 
 public class FilmItems {
 
+    private int id;
     private String title;
     private String overview;
     private String release_date;
@@ -16,11 +17,13 @@ public class FilmItems {
 
     public FilmItems(JSONObject object) {
         try {
+            int id = object.getInt("id");
             String poster = object.getString("poster_path");
             String title = object.getString("title");
             String overview = object.getString("overview");
             String release_date = object.getString("release_date");
 
+            this.id = id;
             this.poster = poster;
             this.title = title;
             this.overview = overview;
@@ -31,6 +34,13 @@ public class FilmItems {
         }
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getPoster() {
         return poster;
@@ -65,6 +75,10 @@ public class FilmItems {
         return month + " " + day + " , " + year;
     }
 
+    public void setRelease_date(String release_date) {
+        this.release_date = release_date;
+    }
+
     private String parseDate(String Date) {
         switch (Date) {
             case "1":
@@ -94,9 +108,5 @@ public class FilmItems {
             default:
                 return "January";
         }
-    }
-
-    public void setRelease_date(String release_date) {
-        this.release_date = release_date;
     }
 }

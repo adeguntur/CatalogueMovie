@@ -18,9 +18,9 @@ import cz.msebera.android.httpclient.Header;
  */
 
 public class MyAsyncTaskLoader extends AsyncTaskLoader<ArrayList<FilmItems>> {
+    private static final String API_KEY = "ef51913175df9055f04866e0282343fb";
     private ArrayList<FilmItems> mData;
     private boolean mHasResult = false;
-
     private String mKumpulanFilm;
 
     public MyAsyncTaskLoader(final Context context, String kumpulanFilm) {
@@ -56,8 +56,6 @@ public class MyAsyncTaskLoader extends AsyncTaskLoader<ArrayList<FilmItems>> {
         }
     }
 
-    private static final String API_KEY = "ef51913175df9055f04866e0282343fb";
-
     @Override
     public ArrayList<FilmItems> loadInBackground() {
         SyncHttpClient client = new SyncHttpClient();
@@ -78,7 +76,6 @@ public class MyAsyncTaskLoader extends AsyncTaskLoader<ArrayList<FilmItems>> {
                     String result = new String(responseBody);
                     JSONObject responseObject = new JSONObject(result);
                     JSONArray results = responseObject.getJSONArray("results");
-
                     for (int i = 0; i < results.length(); i++) {
                         JSONObject film = results.getJSONObject(i);
                         FilmItems filmItems = new FilmItems(film);
